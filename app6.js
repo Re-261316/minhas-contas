@@ -12,4 +12,5 @@ function baixaCart(){var v=parseFloat($("cv1").value),n=($("cd1").value||"").tri
  if(v>(+S.carteira||0)&&!confirm("Você tem só "+R(+S.carteira||0)+" na carteira. Dar baixa mesmo assim?"))return;
  var mes=tm(),pk={};pk[mes]=true;S.items.push({id:rid(),n:n,v:v,g:"Dia a dia",cur:0,tot:0,dia:new Date().getDate(),q:"",cat:guess(n),mes:mes,rec:false,pago:pk,pay:"Dinheiro"});
  S.carteira=(+S.carteira||0)-v;S.mes=mes;save();draw()}
+(function(){var h=document.querySelector(".top h1");if(h)h.textContent="💰 Minhas Contas"})();
 draw();
