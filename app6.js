@@ -12,5 +12,10 @@ function baixaCart(){var v=parseFloat($("cv1").value),n=($("cd1").value||"").tri
  if(v>(+S.carteira||0)&&!confirm("Você tem só "+R(+S.carteira||0)+" na carteira. Dar baixa mesmo assim?"))return;
  var mes=tm(),pk={};pk[mes]=true;S.items.push({id:rid(),n:n,v:v,g:"Dia a dia",cur:0,tot:0,dia:new Date().getDate(),q:"",cat:guess(n),mes:mes,rec:false,pago:pk,pay:"Dinheiro"});
  S.carteira=(+S.carteira||0)-v;S.mes=mes;save();draw()}
+function bkBanner(){if(!S.items.length)return'<div class="card" style="background:var(--c2)">👋 App vazio. Toque no ⚙️ (no alto) pra restaurar um backup, ou no + pra lançar.</div>';if(S.ultBackup==iso())return"";return'<div class="card" style="background:var(--c2)">💾 O backup de hoje ainda não foi feito. <button class="chip on" onclick="ajustes()">Fazer agora</button></div>'}
+function bkDia(){if(!S.items.length||S.ultBackup==iso()||S.lembrou==iso())return;var el=$("lk");if(el&&el.style.display!="none"&&pinCfg())return;S.lembrou=iso();save();
+ $("sh").innerHTML='<h1>💾 Backup de hoje</h1><p class="mu">Seus dados ficam só neste aparelho. Que tal guardar uma cópia agora?</p><button class="btn" onclick="compartilhar();closeS()">📤 Compartilhar (Drive, WhatsApp…)</button><button class="btn2 btn" onclick="baixar();closeS()">⬇️ Baixar arquivo</button><button class="btn2 btn" onclick="closeS()">Agora não</button>';$("ov").style.display="flex"}
+patchFn("destrava",[['if(el)el.style.display="none"','if(el)el.style.display="none";setTimeout(bkDia,300)']]);
+setTimeout(bkDia,900);
 (function(){var h=document.querySelector(".top h1");if(h)h.textContent="💰 Minhas Contas"})();
 draw();
